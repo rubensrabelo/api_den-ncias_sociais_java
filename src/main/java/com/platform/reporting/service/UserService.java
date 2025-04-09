@@ -31,6 +31,7 @@ public class UserService {
         User object = repository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Object not found."));
         updateData(object, objUpdate);
+        object = repository.save(object);
         return object;
     }
 
@@ -41,8 +42,8 @@ public class UserService {
     }
 
     private void updateData(User object, User objUpdate) {
-        object.setFirstName(object.getFirstName());
-        object.setLastName(object.getLastName());
-        object.setEmail(object.getEmail());
+        object.setFirstName(objUpdate.getFirstName());
+        object.setLastName(objUpdate.getLastName());
+        object.setEmail(objUpdate.getEmail());
     }
 }
