@@ -30,7 +30,19 @@ public class UserService {
     public User update(String id, User objUpdate) {
         User object = repository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Object not found."));
-        // Continuando aqui
+        updateData(object, objUpdate);
         return object;
+    }
+
+    public void delete(String id) {
+        repository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Object not found."));
+        repository.deleteById(id);
+    }
+
+    private void updateData(User object, User objUpdate) {
+        object.setFirstName(object.getFirstName());
+        object.setLastName(object.getLastName());
+        object.setEmail(object.getEmail());
     }
 }
