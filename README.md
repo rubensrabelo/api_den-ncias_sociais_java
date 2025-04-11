@@ -54,7 +54,7 @@ classDiagram
 
   User "1"-- "*" Complaint
   Complaint "1"-- "*" StatusHistory
-  Complaint *-- "1" Address
+  Complaint "1"--"1" Address
   Complaint "*"-- "1" Tag
 
 ```
