@@ -5,10 +5,10 @@ classDiagram
   direction LR
   class User {
     _id: String
-    firstName: str
-    lastName: str
-    email: str
-    password: str
+    firstName: String
+    lastName: String
+    email: String
+    password: String
   }
 
   class Address {
@@ -20,13 +20,12 @@ classDiagram
   }
   
   class Complaint {
-    _id: str
-    title: str
-    description: str
-    category: Category
+    _id: String
+    title: String
+    description: String
+    tag: Tag
     address: Address
-    image_url: str
-    submission_date: Instant
+    image_url: String
     user_id: String
     isAnonymouos: boolean
   }
@@ -46,18 +45,16 @@ classDiagram
     status: StatusEnum
     created_date: Instant
     updated_date: Instant
-    description: String
   }
 
-  class Category {
+  class Tag {
     _id: String
     name: String
-    description: String
   }
 
   User "1"-- "*" Complaint
   Complaint "1"-- "*" StatusHistory
   Complaint *-- "1" Address
-  Complaint "*"-- "1" Category
+  Complaint "*"-- "1" Tag
 
 ```
