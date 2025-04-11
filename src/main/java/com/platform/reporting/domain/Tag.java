@@ -6,7 +6,7 @@ public class Tag {
 
     private String id;
     private String name;
-    
+
     Tag() {}
 
     Tag(String id, String name) {
