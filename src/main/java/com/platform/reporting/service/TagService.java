@@ -10,8 +10,11 @@ import java.util.List;
 @Service
 public class TagService {
 
-    @Autowired
-    private TagRepository repository;
+    private final TagRepository repository;
+
+    public TagService(TagRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Tag> findByNameContainingIgnoreCase(String name){
         return repository.findByNameContainingIgnoreCase(name);

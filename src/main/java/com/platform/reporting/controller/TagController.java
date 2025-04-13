@@ -15,8 +15,11 @@ import java.util.List;
 @RequestMapping(value = "/tags")
 public class TagController {
 
-    @Autowired
-    public TagService service;
+    public final TagService service;
+
+    public TagController(TagService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<List<Tag>> searchTags(@RequestParam String name) {

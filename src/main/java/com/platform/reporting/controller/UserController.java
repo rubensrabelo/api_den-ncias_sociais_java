@@ -2,7 +2,6 @@ package com.platform.reporting.controller;
 
 import com.platform.reporting.domain.User;
 import com.platform.reporting.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,10 +11,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value="/users")
-public class UserCollaboratory {
+public class UserController {
 
-    @Autowired
-    private UserService service;
+    private final UserService service;
+
+    public UserController(UserService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
