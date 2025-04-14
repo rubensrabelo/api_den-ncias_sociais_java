@@ -24,7 +24,10 @@ classDiagram
     title: String
     description: String
     address: Address
+    status: StatusEnum
     image_url: String
+    created_date: Instant
+    updated_date: Instant
     isAnonymous: boolean
   }
 
@@ -36,13 +39,6 @@ classDiagram
     CLOSED
     REJECTED
   }
-  
-  class StatusHistory {
-    _id: String
-    status: StatusEnum
-    created_date: Instant
-    updated_date: Instant
-  }
 
   class Tag {
     _id: String
@@ -50,7 +46,6 @@ classDiagram
   }
 
   User "1"-- "*" Complaint
-  Complaint "1"-- "*" StatusHistory
   Complaint "1"--"1" Address
   Complaint "*"-- "1" Tag
 

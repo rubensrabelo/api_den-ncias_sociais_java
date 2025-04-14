@@ -1,10 +1,14 @@
 package com.platform.reporting.domain;
 
 import com.platform.reporting.domain.embedded.Address;
+import com.platform.reporting.domain.enums.StatusEnum;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,6 +21,14 @@ public class Complaint {
     private String title;
     private String description;
     private Address address;
+    private StatusEnum status;
+
+    @CreatedDate
+    private Instant createdAt;
+
+    @LastModifiedDate
+    private Instant updatedAt;
+
     private String imageUrl;
     private Boolean isAnonymous;
 
@@ -32,6 +44,7 @@ public class Complaint {
         this.title = title;
         this.description = description;
         this.address = address;
+        this.status = StatusEnum.PENDING;
         this.imageUrl = imageUrl;
         this.isAnonymous = isAnonymous;
     }
@@ -66,6 +79,30 @@ public class Complaint {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getImageUrl() {
@@ -104,11 +141,11 @@ public class Complaint {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Complaint complaint = (Complaint) o;
-        return Objects.equals(id, complaint.id) && Objects.equals(title, complaint.title) && Objects.equals(description, complaint.description) && Objects.equals(address, complaint.address) && Objects.equals(imageUrl, complaint.imageUrl) && Objects.equals(isAnonymous, complaint.isAnonymous);
+        return Objects.equals(id, complaint.id) && Objects.equals(title, complaint.title) && Objects.equals(description, complaint.description) && Objects.equals(address, complaint.address) && status == complaint.status && Objects.equals(createdAt, complaint.createdAt) && Objects.equals(updatedAt, complaint.updatedAt) && Objects.equals(imageUrl, complaint.imageUrl) && Objects.equals(isAnonymous, complaint.isAnonymous);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, address, imageUrl, isAnonymous);
+        return Objects.hash(id, title, description, address, status, createdAt, updatedAt, imageUrl, isAnonymous);
     }
 }
