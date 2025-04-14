@@ -1,24 +1,29 @@
 package com.platform.reporting.domain;
 
 import com.platform.reporting.domain.enums.StatusEnum;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 import java.util.Objects;
 
+@Document(collection = "status_history")
 public class StatusHistory {
 
+    @Id
     private String id;
     private StatusEnum status;
+
+    @CreatedDate
     private Instant createdAt;
+
+    @LastModifiedDate
     private Instant updatedAt;
 
-    public StatusHistory() {}
-
-    public StatusHistory(Instant createdAt, Instant updatedAt) {
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-
-        this.status = StatusEnum.PENDING;
+    public StatusHistory() {
+        status = StatusEnum.PENDING;
     }
 
     public String getId() {
