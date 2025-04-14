@@ -23,11 +23,9 @@ classDiagram
     _id: String
     title: String
     description: String
-    tag: Tag
     address: Address
     image_url: String
-    user_id: String
-    isAnonymouos: boolean
+    isAnonymous: boolean
   }
 
   class StatusEnum {
@@ -41,7 +39,6 @@ classDiagram
   
   class StatusHistory {
     _id: String
-    complaint_id: String
     status: StatusEnum
     created_date: Instant
     updated_date: Instant
