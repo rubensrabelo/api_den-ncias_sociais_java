@@ -2,6 +2,7 @@ package com.platform.reporting.domain;
 
 import com.platform.reporting.domain.embedded.Address;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashSet;
@@ -19,7 +20,10 @@ public class Complaint {
     private String imageUrl;
     private Boolean isAnonymous;
 
+    @DBRef(lazy = true)
     private User user;
+
+    @DBRef(lazy = true)
     private Set<Tag> tags = new HashSet<>();
 
     public Complaint() {}
@@ -88,8 +92,13 @@ public class Complaint {
         this.user = user;
     }
 
-    // Falta adicionar o bidirecionamento nas tags
+    public Set<Tag> getTags() {
+        return tags;
+    }
 
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
 
     @Override
     public boolean equals(Object o) {

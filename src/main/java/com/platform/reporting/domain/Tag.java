@@ -17,9 +17,9 @@ public class Tag implements Serializable {
     private String id;
     private String name;
 
-    Tag() {}
+    public Tag() {}
 
-    Tag(String id, String name) {
+    public Tag(String id, String name) {
         this.id = id;
         this.name = name;
     }
