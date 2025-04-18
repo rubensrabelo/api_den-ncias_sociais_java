@@ -2,10 +2,11 @@ package com.platform.reporting.service;
 
 import com.platform.reporting.domain.Tag;
 import com.platform.reporting.repository.TagRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TagService {
@@ -20,11 +21,19 @@ public class TagService {
         return repository.findByNameContainingIgnoreCase(name);
     }
 
-    public boolean create(Tag tag) {
-        if(repository.findByName(tag.getName()).isPresent())
-            return false;
+    public Set<Tag> findOrCreateTags(Set<String> names) {
+        Set<Tag> result = new HashSet<>();
 
-        repository.save(tag);
-        return true;
+        for(String name : names){
+            Tag tag = repository.findByName(name)
+                    .orElseGet(() -> {
+                        Tag newTag = new Tag();
+                        newTag.setName(name);
+                        return repository.insert(newTag);
+                    });
+            result.add(tag);
+        }
+
+        return result;
     }
 }
